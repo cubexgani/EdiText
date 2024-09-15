@@ -50,20 +50,14 @@ public class TabComponent extends JPanel {
     }
     String getModifiedTitle() {
         String modifiedTitle = title.substring(2);
-        if(title.startsWith("* ")) {
-            System.out.println("The title got modified: " + modifiedTitle);
-            return modifiedTitle;
-        }
-        else {
-            System.out.println("The title is intact: " + title);
-            return title;
-        }
+        if(title.startsWith("* ")) return modifiedTitle;
+        else return title;
     }
     private class TabButton extends JButton {
         TabButton(TexTabbedPane tabbedPane, int index) {
             setPreferredSize(new Dimension(17, 17));
             setUI(new BasicButtonUI());
-            setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+            setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
             Color original = getBackground();
             addMouseListener(new MouseInputAdapter() {
                 @Override
@@ -96,14 +90,8 @@ public class TabComponent extends JPanel {
     }
     boolean close() {
         statusLabel.setText(" ");
-        button.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+        button.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         int ind = tabbedPane.indexOfTab(title);
-        System.out.println("How many tabs are there today dear little boy of mine: " + tabbedPane.getTabCount());
-        System.out.println("Nice index: " + ind + "\n" +
-                            "Modified title: " + getModifiedTitle() + "\n" +
-                            "Original title: " + TabComponent.this.title
-        );
-        System.out.println(tabbedPane.getTitleAt(tabbedPane.getTabCount() - 1));
         tabbedPane.setSelectedIndex(ind);
         if(title.startsWith("* ")) {
             int option = JOptionPane.showConfirmDialog(tabbedPane, "Do you want to save changes to " + getModifiedTitle() + "?", "Save the file", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -115,8 +103,6 @@ public class TabComponent extends JPanel {
                     System.out.println("Couldn't save the file while closing it.");
                 }
                 fUtils.removeFromDir(fUtils.fileName);
-                System.out.println("Oh boy the title: " + getModifiedTitle());
-                System.out.println(fUtils.showMap());
             }
             else if(option == JOptionPane.NO_OPTION) {
                 button.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
@@ -127,14 +113,13 @@ public class TabComponent extends JPanel {
                 }
             }
             else {
-                button.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+                button.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
                 return true;    //cancelled
             }
         }
         else {
             fUtils.removeFromDir(getModifiedTitle());
             tabbedPane.removeTabAt(tabbedPane.getSelectedIndex());
-            System.out.println(fUtils.showMap());
         }
         if (tabbedPane.getTabCount() == 0) {
             statusLabel.setText("Click File > New Tab or hit Ctrl+T to start editing!");

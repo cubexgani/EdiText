@@ -13,7 +13,7 @@ public class EditorWindow extends JFrame {
     JLabel statusLabel;
     EditorWindow() {
         super("EdiText");
-        setIconImage(new ImageIcon("src\\text editor.png").getImage());
+        setIconImage(new ImageIcon("text editor.png").getImage());
         setLayout(new BorderLayout());
         TexTabbedPane tabbedPane = new TexTabbedPane();
         statusLabel = new JLabel("Click File > New Tab or hit Ctrl+T to start editing!");

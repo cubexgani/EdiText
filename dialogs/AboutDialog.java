@@ -17,14 +17,14 @@ public class AboutDialog extends JDialog {
     JLabel label;
     public AboutDialog() {
         setBounds(25, 100, 500, 300);
-        ImageIcon icon = new ImageIcon("src\\text editor.png");
+        ImageIcon icon = new ImageIcon("text editor.png");
         Image img = icon.getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT);
         icon.setImage(img);
         label = new JLabel(icon);
         setIconImage(img);
         JPanel panel = new JPanel(new FlowLayout());
         panel.setBounds(50, 50, 200, 200);
-        JTextArea area = new JTextArea(readFile("src\\dialogs\\aboutText.txt"));
+        JTextArea area = new JTextArea(readFile("dialogs\\aboutText.txt"));
         area.setFont(new Font("Arial", Font.PLAIN, 14));
         area.setEditable(false);
         area.setOpaque(false);
